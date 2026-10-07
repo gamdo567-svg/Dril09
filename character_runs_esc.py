@@ -45,3 +45,7 @@ class Controls:
 
 def horizontal_input(controls):
     return int("right" in controls.pressed) - int("left" in controls.pressed)
+
+
+def vertical_input(controls):
+    return int("up" in controls.pressed) - int("down" in controls.pressed)
