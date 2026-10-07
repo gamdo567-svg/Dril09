@@ -113,3 +113,12 @@ def update(character, controls, dt):
     clamp_horizontal(character)
     clamp_vertical(character)
     animate(character, dt)
+
+
+def draw(pico, background, sheet, character):
+    pico.clear_canvas()
+    background.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                    SCREEN_WIDTH, SCREEN_HEIGHT)
+    sheet.clip_draw(*sprite_rectangle(character, sheet.h),
+                    character.x, character.y, CHARACTER_WIDTH, CHARACTER_HEIGHT)
+    pico.update_canvas()
