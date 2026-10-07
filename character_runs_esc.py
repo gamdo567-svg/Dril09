@@ -29,3 +29,15 @@ class Character:
     state: str = "Idle"
     frame: int = 0
     animation_time: float = 0.0
+
+
+class Controls:
+    def __init__(self):
+        self.pressed = set()
+
+    def press(self, direction):
+        if direction in {"left", "right", "up", "down"}:
+            self.pressed.add(direction)
+
+    def release(self, direction):
+        self.pressed.discard(direction)
