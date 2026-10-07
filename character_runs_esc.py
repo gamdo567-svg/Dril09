@@ -142,3 +142,39 @@ def handle_events(pico, controls):
               and event.event == pico.SDL_WINDOWEVENT_FOCUS_LOST):
             controls.pressed.clear()
     return running
+
+
+def main(smoke_test=False):
+    import pico2d as pico
+    background_path = asset_path("TUK_GROUND.png")
+    sheet_path = asset_path("animation_sheet.png")
+    pico.open_canvas(SCREEN_WIDTH, SCREEN_HEIGHT)
+    try:
+        background = pico.load_image(background_path)
+        sheet = pico.load_image(sheet_path)
+        if background is None or sheet is None:
+            raise RuntimeError("배경 또는 캐릭터 이미지를 불러오지 못했습니다.")
+        if sheet.w < FRAME_COUNT * FRAME_WIDTH or sheet.h < 4 * FRAME_HEIGHT:
+            raise ValueError("캐릭터 시트 크기가 8열 4행 프레임 규격보다 작습니다.")
+        character, controls = Character(), Controls()
+        previous = perf_counter()
+        frames = 0
+        while handle_events(pico, controls):
+            now = perf_counter()
+            dt, previous = now - previous, now
+            update(character, controls, dt)
+            draw(pico, background, sheet, character)
+            frames += 1
+            if smoke_test and frames >= 12:
+                break
+            pico.delay(0.01)
+    finally:
+        pico.close_canvas()
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="방향키로 이동하고 ESC로 종료합니다.")
+    parser.add_argument("--smoke-test", action="store_true",
+                        help="12프레임 렌더링 후 자동 종료")
+    main(parser.parse_args().smoke_test)
