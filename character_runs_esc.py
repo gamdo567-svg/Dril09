@@ -63,3 +63,9 @@ def update_state(character, dx, dy):
     if previous != (character.state, character.facing):
         character.frame = 0
         character.animation_time = 0.0
+
+
+def movement_vector(controls):
+    dx, dy = horizontal_input(controls), vertical_input(controls)
+    length = hypot(dx, dy)
+    return (dx / length, dy / length) if length else (0.0, 0.0)
