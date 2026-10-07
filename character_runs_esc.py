@@ -92,3 +92,15 @@ def animate(character, dt):
     steps = int((character.animation_time + 1e-12) / interval)
     character.frame = (character.frame + steps) % FRAME_COUNT
     character.animation_time = max(0.0, character.animation_time - steps * interval)
+
+
+ANIMATION_ROWS = {
+    ("Idle", "right"): 0, ("Idle", "left"): 1,
+    ("Run", "right"): 2, ("Run", "left"): 3,
+}
+
+def sprite_rectangle(character, sheet_height):
+    row = ANIMATION_ROWS[character.state, character.facing]
+    return (character.frame * FRAME_WIDTH,
+            sheet_height - (row + 1) * FRAME_HEIGHT,
+            FRAME_WIDTH, FRAME_HEIGHT)
