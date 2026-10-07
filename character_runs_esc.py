@@ -79,3 +79,8 @@ def move_character(character, dx, dy, dt):
 def clamp_horizontal(character):
     half = CHARACTER_WIDTH / 2
     character.x = max(half, min(SCREEN_WIDTH - half, character.x))
+
+
+def clamp_vertical(character):
+    half = CHARACTER_HEIGHT / 2
+    character.y = max(half, min(SCREEN_HEIGHT - half, character.y))
