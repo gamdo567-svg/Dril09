@@ -19,3 +19,13 @@ def asset_path(name):
     if not path.is_file():
         raise FileNotFoundError(f"게임 리소스를 찾을 수 없습니다: {path}")
     return str(path)
+
+
+@dataclass
+class Character:
+    x: float = SCREEN_WIDTH / 2
+    y: float = SCREEN_HEIGHT / 2
+    facing: str = "right"
+    state: str = "Idle"
+    frame: int = 0
+    animation_time: float = 0.0
