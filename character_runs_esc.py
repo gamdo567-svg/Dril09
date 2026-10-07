@@ -49,3 +49,8 @@ def horizontal_input(controls):
 
 def vertical_input(controls):
     return int("up" in controls.pressed) - int("down" in controls.pressed)
+
+
+def update_facing(character, dx):
+    if dx:
+        character.facing = "right" if dx > 0 else "left"
