@@ -54,3 +54,12 @@ def vertical_input(controls):
 def update_facing(character, dx):
     if dx:
         character.facing = "right" if dx > 0 else "left"
+
+
+def update_state(character, dx, dy):
+    previous = character.state, character.facing
+    update_facing(character, dx)
+    character.state = "Run" if dx or dy else "Idle"
+    if previous != (character.state, character.facing):
+        character.frame = 0
+        character.animation_time = 0.0
