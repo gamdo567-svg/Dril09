@@ -122,3 +122,23 @@ def draw(pico, background, sheet, character):
     sheet.clip_draw(*sprite_rectangle(character, sheet.h),
                     character.x, character.y, CHARACTER_WIDTH, CHARACTER_HEIGHT)
     pico.update_canvas()
+
+
+def handle_events(pico, controls):
+    keys = {pico.SDLK_LEFT: "left", pico.SDLK_RIGHT: "right",
+            pico.SDLK_UP: "up", pico.SDLK_DOWN: "down"}
+    running = True
+    for event in pico.get_events():
+        if event.type == pico.SDL_QUIT:
+            running = False
+        elif event.type == pico.SDL_KEYDOWN:
+            if event.key == pico.SDLK_ESCAPE:
+                running = False
+            elif event.key in keys:
+                controls.press(keys[event.key])
+        elif event.type == pico.SDL_KEYUP and event.key in keys:
+            controls.release(keys[event.key])
+        elif (event.type == pico.SDL_WINDOWEVENT
+              and event.event == pico.SDL_WINDOWEVENT_FOCUS_LOST):
+            controls.pressed.clear()
+    return running
