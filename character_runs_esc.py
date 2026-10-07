@@ -12,3 +12,10 @@ FRAME_WIDTH = FRAME_HEIGHT = 100
 FRAME_COUNT = 8
 IDLE_INTERVAL, RUN_INTERVAL = 0.15, 0.10
 ASSET_DIRECTORY = Path(__file__).resolve().parent
+
+
+def asset_path(name):
+    path = ASSET_DIRECTORY / name
+    if not path.is_file():
+        raise FileNotFoundError(f"게임 리소스를 찾을 수 없습니다: {path}")
+    return str(path)
