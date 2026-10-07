@@ -69,3 +69,8 @@ def movement_vector(controls):
     dx, dy = horizontal_input(controls), vertical_input(controls)
     length = hypot(dx, dy)
     return (dx / length, dy / length) if length else (0.0, 0.0)
+
+
+def move_character(character, dx, dy, dt):
+    character.x += dx * MOVE_SPEED * dt
+    character.y += dy * MOVE_SPEED * dt
