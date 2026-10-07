@@ -32,7 +32,6 @@ hide_cursor()
 
 while running:
     clear_canvas()
-
     # fill here
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
