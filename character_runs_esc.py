@@ -74,3 +74,8 @@ def movement_vector(controls):
 def move_character(character, dx, dy, dt):
     character.x += dx * MOVE_SPEED * dt
     character.y += dy * MOVE_SPEED * dt
+
+
+def clamp_horizontal(character):
+    half = CHARACTER_WIDTH / 2
+    character.x = max(half, min(SCREEN_WIDTH - half, character.x))
