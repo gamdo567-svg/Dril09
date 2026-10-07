@@ -104,3 +104,12 @@ def sprite_rectangle(character, sheet_height):
     return (character.frame * FRAME_WIDTH,
             sheet_height - (row + 1) * FRAME_HEIGHT,
             FRAME_WIDTH, FRAME_HEIGHT)
+
+
+def update(character, controls, dt):
+    dx, dy = movement_vector(controls)
+    update_state(character, dx, dy)
+    move_character(character, dx, dy, dt)
+    clamp_horizontal(character)
+    clamp_vertical(character)
+    animate(character, dt)
