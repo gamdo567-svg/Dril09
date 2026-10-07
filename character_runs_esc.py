@@ -84,3 +84,11 @@ def clamp_horizontal(character):
 def clamp_vertical(character):
     half = CHARACTER_HEIGHT / 2
     character.y = max(half, min(SCREEN_HEIGHT - half, character.y))
+
+
+def animate(character, dt):
+    interval = RUN_INTERVAL if character.state == "Run" else IDLE_INTERVAL
+    character.animation_time += dt
+    steps = int((character.animation_time + 1e-12) / interval)
+    character.frame = (character.frame + steps) % FRAME_COUNT
+    character.animation_time = max(0.0, character.animation_time - steps * interval)
