@@ -41,3 +41,7 @@ class Controls:
 
     def release(self, direction):
         self.pressed.discard(direction)
+
+
+def horizontal_input(controls):
+    return int("right" in controls.pressed) - int("left" in controls.pressed)
